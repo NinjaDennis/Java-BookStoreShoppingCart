@@ -30,7 +30,7 @@ public class ShoppingCart {
 	 }
  }
 
- public void updateCart(int index, int quantity) {
+ public void updateCartItem(int index, int quantity) {
 	 try {
 		 CartItem cartItem=cartItems.get(index);
 		 cartItem.setQuantity(quantity);
