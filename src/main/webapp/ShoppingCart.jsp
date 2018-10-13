@@ -11,7 +11,7 @@
 
 <body>
 	<ul>
-	  <li><a href="/books/list">Book Listing</a></li>
+	<li><a href="/books/list">Book Listing</a></li>
     <li><a href="/books/admin">Admin</a></li>
     <li><a class="active" href="/cart/">Cart</a></li>
 	</ul>
@@ -29,14 +29,18 @@
                   <th></th>
 	            </tr>
 
-      	 			<c:forEach items="${cart.cartItems}" var="cartItem">
+      	 			<c:forEach items="${cart.cartItems}" var="cartItem" varStatus="loop">
                   <tr>
+                  	<form name="cart_form" action="/cart/update">
+                  	  <input type="hidden" name="index" value="<c:out value='${loop.index}' />" />
                       <td> ${ cartItem.getTitle() } </td>
                       <td> ${ cartItem.getAuthor() } </td>
                       <td> <fmt:formatNumber value = "${ cartItem.getPrice() }" type = "currency"/>  </td>
-                      <td>${ cartItem.getQuantity() }</td>
+                      <td><input type="number" name="quantity" min="1" max="50" value="${cartItem.getQuantity()}"/></td>
                       <td> <fmt:formatNumber value = "${ cartItem.getTotalCost() }" type = "currency"/> </td>
-                      <td>Update Delete</td>
+                      <td><input type="submit" value="Update"/>
+                      	  <input type="submit" formaction="/cart/delete" value="Delete" /></td>
+                    </form>>
                   </tr>
               </c:forEach>
 	        </table>
